@@ -1,0 +1,16 @@
+services:
+  frank-main-api:
+    build:
+      context: ./frank-main-api/
+      dockerfile: Dockerfile-frank-main-api
+    image: frankenstack-sampler-frank-main-api
+
+  frank-nginx:
+    build:
+      context: ./frank-nginx/
+      dockerfile: Dockerfile-frank-nginx
+    image: frankenstack-sampler-frank-nginx
+    depends_on:
+      - frank-main-api
+    ports:
+      - "9999:80"

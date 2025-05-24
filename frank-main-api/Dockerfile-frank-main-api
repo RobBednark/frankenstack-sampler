@@ -1,0 +1,58 @@
+# FROM sha256:d07b6d006b4d0c0fae7360e12c4332adbe2e988457936ea7ad25858fe0f78208
+# sha256:d07b6d006b4d0c0fae7360e12c4332adbe2e988457936ea7ad25858fe0f78208 = python:3.13.3-bookworm as of 2025-05-22 3:52pm PDT
+FROM python:3.13.3-bookworm
+
+WORKDIR /frank-main-api
+
+COPY . /frank-main-api
+
+# mkdir /docker_build_logs
+RUN \
+  (set -euvx; \
+  pwd; \
+  ls -l /; \
+  mkdir -p /docker_build_logs; \
+  ls -l /; \
+  ls -laR /docker_build_logs; \
+  )
+
+# Install poetry
+RUN \
+  ( \
+    set -euvx; \
+    pip install --upgrade pip; \
+    pip install poetry; \
+    poetry --version; \
+  ) 2>&1 | tee -a /docker_build_logs/log
+
+# Install dependencies (from pyproject.toml used by poetry)
+RUN \
+  ( \
+    set -euvx; \
+    poetry env remove --all; \
+    poetry env use python; \
+    poetry run python --version; \
+    poetry install --no-root; \
+    poetry env info; \
+    poetry env list; \
+  ) 2>&1 | tee -a /docker_build_logs/log
+
+# Show installed python packages
+RUN \
+  ( \
+  set -euvx; \
+  echo 'show installed packages:'; \
+  poetry run pip freeze | sort | tee /docker_build_logs/poetry-run-pip-freeze.log; \
+  set +vx; \
+  echo "+ source $(poetry env info --path)/bin/activate"; \
+  date; \
+  source $(poetry env info --path)/bin/activate; \
+  set -vx; \
+  pip freeze | sort | tee /docker_build_logs/pip-freeze; \
+  ) 2>&1 | tee -a /docker_build_logs/log
+
+CMD \
+( \
+set -uvx; \
+./run.sh; \
+)

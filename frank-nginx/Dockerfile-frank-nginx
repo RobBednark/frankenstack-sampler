@@ -1,0 +1,11 @@
+FROM nginx@sha256:fb39280b7b9eba5727c884a3c7810002e69e8f961cc373b89c92f14961d903a0
+# FROM nginx:1.27.5-bookworm
+
+COPY nginx-conf-files/default.conf /etc/nginx/conf.d
+COPY nginx-conf-files/nginx.conf /etc/nginx
+
+RUN apt-get update
+RUN apt-get install tzdata
+
+ENV TZ=US/Pacific
+RUN ln -sf /usr/share/zoneinfo/US/Pacific /etc/localtime
