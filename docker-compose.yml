@@ -1,16 +1,27 @@
 services:
-  frank-main-api:
+  frank-api-main:
     build:
-      context: ./frank-main-api/
-      dockerfile: Dockerfile-frank-main-api
-    image: frankenstack-sampler-frank-main-api
+      context: ./frank-api-main/
+      dockerfile: Dockerfile-frank-api-main
+    container_name: frank-api-main
+    image: frankenstack-sampler-frank-api-main
 
   frank-nginx:
     build:
       context: ./frank-nginx/
       dockerfile: Dockerfile-frank-nginx
+    container_name: frank-nginx
     image: frankenstack-sampler-frank-nginx
     depends_on:
-      - frank-main-api
+      - frank-api-main
     ports:
       - "9999:80"
+
+  frank-web-app-main:
+    build:
+      context: ./frank-web-app-main/
+      dockerfile: Dockerfile-frank-web-app-main
+    container_name: frank-web-app-main
+    image: frankenstack-sampler-frank-web-app-main
+    volumes:
+      - ./frank-web-app-main:/frank-web-app-main
