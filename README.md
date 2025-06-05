@@ -7,6 +7,15 @@ A web app, designed to sample an ever-growing kitchen sink of popular tech (clou
 
 - To touch and explore a wide range of technologies.
 
-- To implement experience firsthand how each piece works at a very basic level.
+- To experience how each piece works at a very basic level.
 
 - To meet the challenge of wiring them all together in a working system.
+
+## How to build and run
+
+```bash
+docker compose up
+```
+
+http://localhost:9999/frank-api-main/ -- the main API page
+http://localhost:9999/frank-web-app-main/ -- the main API page
