@@ -1,12 +1,18 @@
-FROM nginx@sha256:fb39280b7b9eba5727c884a3c7810002e69e8f961cc373b89c92f14961d903a0
+FROM nginx:1.27.5-bookworm
+
+# FROM nginx@sha256:fb39280b7b9eba5727c884a3c7810002e69e8f961cc373b89c92f14961d903a0
 # nginx@sha256:fb39280b7b9eba5727c884a3c7810002e69e8f961cc373b89c92f14961d903a0 = nginx:1.27.5-bookworm as of 2025-05-23 5:30pm
-# FROM nginx:1.27.5-bookworm
 
 COPY nginx-conf-files/default.conf /etc/nginx/conf.d
 COPY nginx-conf-files/nginx.conf /etc/nginx
+RUN mkdir -p /etc/nginx/html
+COPY html/* /etc/nginx/html/
 
 RUN apt-get update
-RUN apt-get install tzdata
+RUN apt-get install -y tzdata  # timezone data
+RUN apt install -y procps  # for "ps" command
+RUN apt install -y vim
 
+# Set the timezone to US/Pacific
 ENV TZ=US/Pacific
 RUN ln -sf /usr/share/zoneinfo/US/Pacific /etc/localtime
