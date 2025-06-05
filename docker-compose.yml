@@ -17,11 +17,11 @@ services:
     ports:
       - "9999:80"
 
-  frank-web-app-main:
+  frank-web-app-main-dev:
     build:
       context: ./frank-web-app-main/
       dockerfile: Dockerfile-frank-web-app-main
-    container_name: frank-web-app-main
+    container_name: frank-web-app-main-dev
     image: frankenstack-sampler-frank-web-app-main
     volumes:
       - ./frank-web-app-main:/frank-web-app-main

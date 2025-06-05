@@ -2,9 +2,9 @@
 # sha256:d07b6d006b4d0c0fae7360e12c4332adbe2e988457936ea7ad25858fe0f78208 = python:3.13.3-bookworm as of 2025-05-22 3:52pm PDT
 FROM python:3.13.3-bookworm
 
-WORKDIR /frank-main-api
+WORKDIR /frank-api-main
 
-COPY . /frank-main-api
+COPY . /frank-api-main
 
 # mkdir /docker_build_logs
 RUN \
