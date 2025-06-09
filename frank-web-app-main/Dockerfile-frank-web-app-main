@@ -4,10 +4,14 @@ FROM node@sha256:7cd385e17f9d66b2c3ae40597359286073a33266db71b5f01ce2d87db81b52f
 # node@sha256:7cd385e17f9d66b2c3ae40597359286073a33266db71b5f01ce2d87db81b52f7 = node:24.0.2-bookworm as of 2025-05-24 5:30pm
 
 WORKDIR /frank-web-app-main/my-app
+RUN apt-get update
+RUN apt-get install less, vim
+
 CMD \
 ( \
 set -uvx; \
 date; \
+pwd; \
 npm run dev; \
 echo "npm run dev exited with status [$?]"; \
 date; \
