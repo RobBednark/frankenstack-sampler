@@ -16,6 +16,8 @@ RUN \
   ls -laR /docker_build_logs; \
   )
 
+RUN apt-get update
+
 # Install poetry
 RUN \
   ( \
