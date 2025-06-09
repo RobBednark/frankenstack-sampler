@@ -16,3 +16,12 @@ RUN apt install -y vim
 # Set the timezone to US/Pacific
 ENV TZ=US/Pacific
 RUN ln -sf /usr/share/zoneinfo/US/Pacific /etc/localtime
+
+CMD \
+( \
+set -uvx; \
+date; \
+echo "starting nginx..."; \
+nginx -g "daemon off;"; \
+echo "nginx exited with status [$?]"; \
+)
