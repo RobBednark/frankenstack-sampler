@@ -16,6 +16,8 @@ services:
       - frank-api-main
     ports:
       - "9999:80"
+    volumes:
+      - ./frank-nginx:/frank_nginx__host_volume
 
   frank-web-app-main-dev:
     build:
