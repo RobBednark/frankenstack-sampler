@@ -5,14 +5,16 @@ FROM node@sha256:7cd385e17f9d66b2c3ae40597359286073a33266db71b5f01ce2d87db81b52f
 
 WORKDIR /frank-web-app-main/my-app
 RUN apt-get update
-RUN apt-get install less, vim
+RUN apt-get install -y less vim
 
 CMD \
 ( \
 set -uvx; \
+echo 'From Dockerfile CMD'; \
 date; \
 pwd; \
 npm run dev; \
 echo "npm run dev exited with status [$?]"; \
+echo 'End of Dockerfile CMD'; \
 date; \
 )
