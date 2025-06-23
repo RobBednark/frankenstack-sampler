@@ -18,4 +18,4 @@ docker compose up
 ```
 
 http://localhost:9999/frank-api-main/ -- the main API page
-http://localhost:9999/frank-web-app-main/ -- the main API page
+http://frank-web-app-main-dev.localhost:9999/ - the main web app (a React app)
